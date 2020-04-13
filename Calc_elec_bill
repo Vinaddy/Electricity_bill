@@ -1,0 +1,22 @@
+from random import uniform,randint
+# Enter your units split here
+unit_split = [50,50,100,100,100,100,300,300,400,1000] 
+
+# Enter the unit split multiplier value. This is a sample generator
+price_split = sorted([round(uniform(1,5),2) for p in range(len(unit_split))])
+#sum(unit_split)
+
+def power_bill(units):
+    for i in range(len(unit_split)+1):
+        if sum(unit_split[:i])<= int(units/100)*100:
+            fixed_unit_list = (unit_split[:i])
+    print(fixed_unit_list,sum(fixed_unit_list))
+    products = [a * b for a, b in zip(fixed_unit_list,price_split)]
+    if sum(fixed_unit_list) != units:
+        remainder_product = price_split[len(fixed_unit_list)] * (units - sum(fixed_unit_list))
+        total = remainder_product + sum(products)
+        return(price_split, sum(products),price_split[len(fixed_unit_list)],units - sum(fixed_unit_list),remainder_product,total)
+    return sum(products),price_split
+    
+
+power_bill(100)
